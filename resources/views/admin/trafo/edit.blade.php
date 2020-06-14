@@ -3,7 +3,6 @@
     <div class="table-responsive" >
     <div class="panel panel-default" >
         <div class="panel-body" >
-            <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
             <link rel="stylesheet" href="/datatables-bs4/css/dataTables.bootstrap4.css">
            <!--  <button href="{{ url('/trafo/create') }}" type="submit" class="btn btn-warning btn-s">Tambah
             </button> -->
@@ -26,15 +25,13 @@
                             <th> Belum Terpakai </th>
                         </tr>
                     </thead> -->
-                       <thead style="text-align: center; font-style: bold;">
+                       <thead>
                         <tr >
                             <th> No </th>
-                            <th> Petugas </th>
                             <th> Kode Trafo </th>
                             <th> Lokasi  </th>
                             <th> Status </th>
                             <th> Deskripsi </th>
-                            <th> Terjadwal </th>
                             <th> Action </th>
                             <!-- <th> Belum Terpakai </th> -->
                         </tr>
@@ -42,8 +39,7 @@
                     <tbody >
                         @foreach($trafos as $item)
                         <tr>
-                            <td style="text-align: right">{{ $item->id }}</td>
-                            <td> {{ $item->name_user }} </td>
+                            <td>{{ $item->id }}</td>
                             <td>{{ $item->kode_trafo }}</td>
                             <td>{{ $item->lokasi }}</td>
                             @if($item->status=='merah')
@@ -54,42 +50,16 @@
                             <td style="background-color: green"></td>
                             @endif
                             <td>{{ $item->deskripsi }}</td>
-                           @if(  $item->verifikasi=='belum terverifikasi'  )
-                          <td style="background-color: red">
-                             <form method="get" action="/trafo/verifikasi/{{$item->id}}">
-                                    <div class="form-group">
-                                        <center>
-                                        <button type="submit" class="btn btn-lg btn-danger ">
-                                            <span class="fa fa-times" style="font-size: 20px;"></span>
-                                        </button>
-                                        </center>     
-                                    </div>
-                                </form>   
-                          </td>
-                          @elseif($item->verifikasi=='terverifikasi' )
-                           <td style="background-color: green"> 
-                                <form method="get" action="/trafo/verifikasi/{{$item->id}}">
-                                    <div class="form-group">
-                                        <center>
-                                        <button type="submit" class="btn btn-lg btn-success ">
-                                            <span class="fa fa-check" style="font-size: 20px;"></span>
-                                        </button>
-                                        </center>     
-                                    </div>
-                                </form> </td>
-                           @endif
                             <td>
-                                <form method="get" action="/trafo/{{$item->id}}">
+                     <form method="get" action="/trafo/{{$item->id}}">
+        {{ csrf_field() }}
+        
+        {{ method_field('DELETE') }}
 
-                                    <div class="form-group">
-                                        <center>
-                                        <button type="submit" class="btn btn-lg btn-default ">
-                                            <span class="fa fa-trash" style="font-size: 20px;"></span>
-                                        </button>
-                                        </center>     
-                                    </div>
-                                </form>   
-                            </td>
+        <div class="form-group">
+            <input type="submit" class="btn btn-danger delete-data" value="Delete">
+        </div>
+    </form>   </td>
                         </tr>
                             @endforeach
                     </tbody>
@@ -100,7 +70,7 @@
         </div>
     </div>
     </div>
- <!-- <script>
+ <script>
     $('.delete-data').click(function(e){
         e.preventDefault() // Don't post the form, unless confirmed
         if (confirm('Are you sure?')) {
@@ -108,5 +78,5 @@
             $(e.target).closest('form').submit() // Post the surrounding form
         }
     });
-</script> -->
+</script>
     @endsection

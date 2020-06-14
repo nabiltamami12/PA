@@ -17,6 +17,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('lte/dist/css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" >
@@ -45,16 +47,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="row justify-content-center">
         <div class="col-md-2" style="padding-top: 20rem ">
             <!-- <div class="card"> -->
-                        <form method="POST" action="#">
+                        <a href="{{ url('ceklis') }}">
                          <button type='button' class='btn btn-default center-block'> CEKLIST TRAFO</button>
-                        </form>
+                        </a>
                 <!-- </div> -->
             </div>
             <div class="col-md-2" style="padding-top: 20rem ">
             <!-- <div class="card"> -->
-                        <form method="POST" action="#">
+                         <a href="{{ url('darurat') }}">
                          <button type='button' class='btn btn-default center-block'> DARURAT</button>
-                        </form>
+                        </a>
                 <!-- </div> -->
             </div>
         </div>
@@ -76,8 +78,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 </div>
 <!-- ./wrapper -->
-
-<!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
 <script src="{{ asset('lte/plugins/jquery/jquery.min.js') }}"></script>

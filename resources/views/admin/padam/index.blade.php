@@ -8,8 +8,6 @@
             </button> -->
             <br/>
             <br/>
-            <br/>
-            <br/>
                         <!-- <div class="card card-warning">
                 <div class="card-header">
                     <h3 class="card-title card-sm">Info Pemadaman</h3>
@@ -33,6 +31,7 @@
                         <tr>
                             <th> No </th>
                             <th> Tanggal </th>
+                            <th> Kode Trafo </th>
                             <th> Lokasi </th>
                             <th> Deskripsi </th>
                         </tr>
@@ -41,32 +40,11 @@
                     <tbody >
                         @foreach($padam as $item)
                         <tr>
-                            <td>{{ $item->Kategori->name }}</td>
-                            <td>{{ $item->title }}</td>
-                            <td>{{$item->padam}}</td>
-                            <td>{{$item->estimasi}}</td>
-                            <td>{{$item->pekerjaan}}</td>
-                            <td>{{$item->wilayah}}</td>
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td><img src="img/{{ $item->icon }}"></td>
-                            <td>
-                                <a href="{{ url('/padam/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit padam">
-                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"/>
-                                </a>
-                                {!! Form::open([
-                                    'method'=>'DELETE',
-                                    'url' => ['/padam', $item->id],
-                                    'style' => 'display:inline'
-                                    ]) !!}
-                                    {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete padam" />', array(
-                                    'type' => 'submit',
-                                    'class' => 'btn btn-danger btn-xs',
-                                    'title' => 'Delete padam',
-                                    'onclick'=>'return confirm("Confirm delete?")'
-                                    )) !!}
-                                    {!! Form::close() !!}
-                            </td>
+                            <td>{{ $item->id}}</td>
+                            <td>{{ $item->tanggal }}</td>
+                            <td>{{$item->kode_trafo}}</td>
+                            <td>{{$item->lokasi}}</td>
+                            <td>{{$item->deskripsi}}</td>
                         </tr>
                             @endforeach
                     </tbody>

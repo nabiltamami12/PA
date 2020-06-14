@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePadamsTable extends Migration
+class CreateHistorisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,16 @@ class CreatePadamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('padams', function (Blueprint $table) {
-           $table->increments('id');
+        Schema::create('historis', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('id_user');
+            $table->string('name_user');
             $table->date('tanggal');
             $table->string('kode_trafo')->nullable();
             $table->string('lokasi')->nullable();
-            $table->text('deskripsi')->nullable();
+            $table->string('status')->nullable();
+            $table->string('deskripsi')->nullable();
+            $table->string('verifikasi');
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ class CreatePadamsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('padams');
+        Schema::dropIfExists('historis');
     }
 }

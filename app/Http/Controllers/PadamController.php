@@ -39,7 +39,18 @@ class PadamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+              $padam =  array(
+           'tanggal' => $request->tanggal,
+            'kode_trafo' => $request->kode_trafo,
+           'lokasi' => $request->lokasi,  
+            'deskripsi' => $request->deskripsi , 
+          
+        );
+
+         // $HistoriUser = DB::insert('history', $ceklis);
+        // Histori::create($ceklis);
+        Padam::create($padam);
+        return redirect('padam');
     }
 
     /**

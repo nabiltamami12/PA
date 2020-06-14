@@ -14,11 +14,15 @@ class CreateTrafosTable extends Migration
     public function up()
     {
         Schema::create('trafos', function (Blueprint $table) {
-            $table->increments('no');
+            $table->increments('id');
+            $table->integer('id_user');
+            $table->string('name_user');
+            $table->date('tanggal');
             $table->string('kode_trafo')->nullable();
             $table->string('lokasi')->nullable();
             $table->string('status')->nullable();
-            $table->string('deskrpsi')->nullable();
+            $table->string('deskripsi')->nullable();
+            $table->string('verifikasi');
             $table->timestamps();
         });
     }
