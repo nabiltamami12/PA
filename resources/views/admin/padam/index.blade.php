@@ -1,78 +1,101 @@
-@extends('admin.admin')
-    @section('content')
-   <!-- @if(Auth::user()->username=='admin') -->
-    <div class="table-responsive">
-        <div class="panel panel-default">
-            <div class="panel-body">
-          <!--   <button href="{{ url('/padam/create') }}" type="submit" class="btn btn-warning btn-s">Tambah
-            </button> -->
-            <br/>
-            <br/>
-                        <!-- <div class="card card-warning">
-                <div class="card-header">
-                    <h3 class="card-title card-sm">Info Pemadaman</h3>
+@extends('layouts.app')
+       @section('content')
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-6 col-md-12">
+              <div class="card">
+                <div class="card-header card-header-warning">
+                  <h4 class="card-title">Employees Stats</h4>
+                  <p class="card-category">New employees on 15th September, 2016</p>
                 </div>
-            </div> -->
-            <div class="table-responsive">
-                  
-        <table class="table table-bordered table-hover text-light" style=" background-color: #134A83;">
-                    <!-- <thead>
-                        <tr>
-                            <th> Kategory Id </th>
-                            <th> Title </th>
-                            <th> Description </th>
-                            <th>Ekstimasi</th>
-                            <th>Jenis Gangguan</th>
-                            <th>Petugas</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead> -->
-                    <thead >
-                        <tr>
-                            <th> No </th>
-                            <th> Tanggal </th>
-                            <th> Kode Trafo </th>
-                            <th> Lokasi </th>
-                            <th> Deskripsi </th>
-                        </tr>
+                <div class="card-body table-responsive">
+                  <table class="table table-hover">
+                    <thead class="text-warning">
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Salary</th>
+                      <th>Country</th>
                     </thead>
-
-                    <tbody >
-                        @foreach($padam as $item)
-                        <tr>
-                            <td>{{ $item->id}}</td>
-                            <td>{{ $item->tanggal }}</td>
-                            <td>{{$item->kode_trafo}}</td>
-                            <td>{{$item->lokasi}}</td>
-                            <td>{{$item->deskripsi}}</td>
-                        </tr>
-                            @endforeach
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>Dakota Rice</td>
+                        <td>$36,738</td>
+                        <td>Niger</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>Minerva Hooper</td>
+                        <td>$23,789</td>
+                        <td>Curaçao</td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>Sage Rodriguez</td>
+                        <td>$56,142</td>
+                        <td>Netherlands</td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>Philip Chaney</td>
+                        <td>$38,735</td>
+                        <td>Korea, South</td>
+                      </tr>
                     </tbody>
-                </table>
-
-            <div class="pagination-wrapper"> {!! $padam->render() !!} </div>
+                  </table>
+                </div>
+              </div>
             </div>
 
-        </div>
-    </div>
-    </div>
-<!-- @else
-<div class="container" style="background-image: url('{{asset('/lte/background/admin-background.jpeg')}}'); background-size: 100%">
-    <div class="row justify-content-center">
-        <div class="col-md-2" style="padding-top: 20rem ">
-       
-                        <form method="POST" action="#">
-                         <button type='button' class='btn btn-primary center-block'> Klik Disini</button>
-                        </form>
-          
-            </div>
-            <div class="col-md-2" style="padding-top: 20rem ">
-           
-                        <form method="POST" action="#">
-                         <button type='button' class='btn btn-primary center-block'> Klik Disini</button>
-                        </form>
+            <div class="col-lg-6 col-md-12">
+                        <div class="card">
+                          <div class="card-header card-header-warning">
+                            <h4 class="card-title">Employees Stats</h4>
+                            <p class="card-category">New employees on 15th September, 2016</p>
+                          </div>
+                          <div class="card-body table-responsive">
+                            <table class="table table-hover">
+                              <thead class="text-warning">
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Salary</th>
+                                <th>Country</th>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>1</td>
+                                  <td>Dakota Rice</td>
+                                  <td>$36,738</td>
+                                  <td>Niger</td>
+                                </tr>
+                                <tr>
+                                  <td>2</td>
+                                  <td>Minerva Hooper</td>
+                                  <td>$23,789</td>
+                                  <td>Curaçao</td>
+                                </tr>
+                                <tr>
+                                  <td>3</td>
+                                  <td>Sage Rodriguez</td>
+                                  <td>$56,142</td>
+                                  <td>Netherlands</td>
+                                </tr>
+                                <tr>
+                                  <td>4</td>
+                                  <td>Philip Chaney</td>
+                                  <td>$38,735</td>
+                                  <td>Korea, South</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+
+
             
-            </div>
+          </div>
         </div>
-    </div>     @endif -->
-    @endsection
+      </div>
+         @endsection
