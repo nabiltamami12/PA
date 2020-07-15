@@ -31,12 +31,12 @@ $title = ' Menu Trafo';?>
                        kode trafo
                         </th>
                          <th style="font-weight: bold">
-                        lokasi
+                        Wilayah
                         </th>
+                        <th style="font-weight: bold">gambar</th>
                         <th style="font-weight: bold; text-align: center;" colspan="2" >
-                          gambar
+                          action
                         </th>
-                        <th></th>
                       </thead>
                       <tbody >
                          <tr>
@@ -44,14 +44,18 @@ $title = ' Menu Trafo';?>
                           @foreach($trafo as $mat)
                     <td>{{ $number }}</td>
                     <td>{{ $mat->kode_trafo }}</td>
-                    <td>{{ $mat->lokasi_trafo }}</td>
-                   <td>
- <img height ="50" src="{{ asset('images/'.$mat->rancangan_trafo.'') }}" > 
+                     <td>{{ $mat->alamat }}</td>
+                       <!-- <td>{{ $mat->seksen }}</td>
+                         <td>{{ $mat->deskripsi }}</td> -->
+                         <td>
+ <img height ="50" src="{{ asset('images/'.$mat->gambar.'') }}" > 
                    </td>
+                     
+    
                     <td class="project-actions text-center">
 
                     <a class="btn btn-info btn-sm pb1" href="{{url('/trafo/edit', $mat->id )}}">
-                        <i class="fas fa-pencil-alt"></i>
+                        <i class="fa fa-pencil"></i>
                         Edit
                     </a>
                   </td>
@@ -62,7 +66,8 @@ $title = ' Menu Trafo';?>
                     {{ csrf_field() }}
                     {{  method_field('DELETE') }}
                     <center> <button class="btn btn-danger btn-sm" type="submit">
-                      
+                        <i class=" fa fa-trash"></i>
+                     
                         Delete
                     </button> </center>
                     </form>
@@ -74,6 +79,8 @@ $title = ' Menu Trafo';?>
                       </tbody>
                             
                     </table>
+  <div>{{ $trafo->links() }}</div>
+
                   </div>
                 </div>
               </div>
@@ -96,18 +103,32 @@ $title = ' Menu Trafo';?>
                 <form action="{{url('/trafo/store' )}}" method="POST" enctype="multipart/form-data" >
                  @csrf
                         <div class="form-group">
-                            <label>id trafo</label>
+                            <label>kode trafo</label>
                             <input type="text" class="form-control" name="kode_trafo" placeholder="">
                         </div>
+                       <div class="form-group">
+                            <label>alamat</label>
+                            <input type="text" class="form-control" name="alamat" placeholder="">
+                        </div>
                         <div class="form-group">
-                            <label>lokasi trafo</label>
-                            <input type="text" class="form-control" name="lokasi_trafo" placeholder="">
-                     </div> <div >
-
-<label>rancangan trafo</label>
+                            <label>sektor</label>
+                            <input type="text" class="form-control" name="seksen" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label>deskripsi</label>
+                            <input type="text" class="form-control" name="deskripsi" placeholder="">
+                        </div>
+                  <label>rancangan trafo</label>
                     <input type="file" name="image" >
-
                 </div>
+                <div class="form-group">
+                            <label>latitude</label>
+                            <input type="text" class="form-control" name="x" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label>longitude</label>
+                            <input type="text" class="form-control" name="y" placeholder="">
+                        </div>
                         
                         
             <div class="modal-footer">

@@ -16,7 +16,16 @@ class CreateJadwalPadamsTable extends Migration
         Schema::dropIfExists('jadwal_padams');
         
         Schema::create('jadwal_padams', function (Blueprint $table) {
-         $table->id();
+         // $table->id();
+           $table->increments('id');          
+           $table->date('jadwal_padam');
+           $table->time('awal_padam');
+           $table->time('akhir_padam');
+            $table->string('wilayah_padam');
+            $table->string('deskripsi_pekerjaan');
+            $table->string('unit_kerja');
+            $table->string('penyulang');
+            $table->string('tim');
             $table->timestamps();
         });
     }

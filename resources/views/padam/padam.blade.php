@@ -2,7 +2,7 @@
        @section('content')
 
 <?php
-$title = ' Menu Material';?>
+$title = ' Menu Padam';?>
  <title>
    <?php echo $title;?>
   </title>
@@ -28,10 +28,25 @@ $title = ' Menu Material';?>
                           NO
                         </th>
                         <th style="font-weight: bold">
-                       id material
+                      Tanggal
                         </th>
                          <th style="font-weight: bold">
-                        nama mateial
+                        Waktu
+                        </th>
+                         <th style="font-weight: bold">
+                       penyulang
+                        </th>
+                         <th style="font-weight: bold">
+                        Wilayah Padam
+                        </th>
+                         <th style="font-weight: bold">
+                        Tim
+                        </th>
+                         <th style="font-weight: bold">
+                        Pekerjaan
+                        </th>
+                         <th style="font-weight: bold">
+                        Unit Kerja
                         </th>
                         <th style="font-weight: bold; text-align: center;" colspan="2" >
                           actions
@@ -39,19 +54,28 @@ $title = ' Menu Material';?>
                       </thead>
                       <tbody >
                          <tr>
-                          @foreach($mate as $mat)
-                    <td>{{ $mat->id }}</td>
-                    <td>{{ $mat->id_material }}</td>
-                    <td>{{ $mat->nama_material }}</td>
+                            <?php $number=1;?>
+                             @if(Auth::user()->role=='admin')
+                          @foreach($padamAdmin as $mat)
+                    <td>{{ $number }}</td>
+                    <td>{{ $mat->jadwal_padam }}</td>
+                    <td>{{ $mat->awal_padam }} - {{ $mat->akhir_padam }}</td>
+                   <td>{{ $mat->penyulang }}</td>
+                   <td>{{ $mat->wilayah_padam }}</td>
+                   <td>{{ $mat->tim }}</td>
+                    <td>{{ $mat->deskripsi_pekerjaan }}</td>
+                    <td>{{ $mat->unit_kerja }}</td>
+
+
                     <td class="project-actions text-center">
 
-                    <a class="btn btn-info btn-sm pb1" href="{{url('/material/edit', $mat->id )}}">
+                    <a class="btn btn-info btn-sm pb1" href="{{url('/padam/edit', $mat->id )}}">
                         <i class="fas fa-pencil-alt"></i>
                         Edit
                     </a>
                   </td>
                   <td>
-                    <form action="{{url('/material', $mat->id )}}" method="get">
+                    <form action="{{url('/padam', $mat->id )}}" method="get">
                     {{-- @csrf
                     @method('DELETE') --}}
                     {{ csrf_field() }}
@@ -62,13 +86,52 @@ $title = ' Menu Material';?>
                     </button> </center>
                     </form>
                 </td>
-</tr>
-                    @endforeach
+                
+</tr>    
+
+                       <?php $number++;?>@endforeach
+                      
                     <a href="#" class="btn btn-warning material-icons" data-toggle="modal" data-target="#exampleModal">add
             </a>
+            @else
+                               @foreach($padam as $mat)
+                    <td>{{ $number }}</td>
+                    <td>{{ $mat->jadwal_padam }}</td>
+                    <td>{{ $mat->awal_padam }} - {{ $mat->akhir_padam }}</td>
+                   <td>{{ $mat->penyulang }}</td>
+                   <td>{{ $mat->wilayah_padam }}</td>
+                   <td>{{ $mat->tim }}</td>
+                    <td>{{ $mat->deskripsi_pekerjaan }}</td>
+                    <td>{{ $mat->unit_kerja }}</td>
+
+
+                    <td class="project-actions text-center">
+
+                    <a class="btn btn-info btn-sm pb1" href="{{url('/padam/edit', $mat->id )}}">
+                        <i class="fas fa-pencil-alt"></i>
+                        Edit
+                    </a>
+                  </td>
+                  <td>
+                   
+                </td>
+                
+</tr>    
+
+                       <?php $number++;?>@endforeach
+                      
+                  
+            @endif
                       </tbody>
                             
                     </table>
+    @if(Auth::user()->role=='admin')
+  <div>{{ $padamAdmin->links() }}</div>
+  @else
+  <div>{{ $padam->links() }}</div>
+  @endif
+
+
                   </div>
                 </div>
               </div>
@@ -82,23 +145,74 @@ $title = ' Menu Material';?>
         <div class="modal-dialog modal-notify modal-lg modal-right" role="document">
           <div class="modal-content">
             <div class="modal-header alert alert-warning">
-              <h5 class="modal-title" id="exampleModalLabel">Tambah Material</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Jadwal Pemadaman</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-                <form action="{{url('/material/store' )}}" method="POST">
+                <form action="{{url('/padam/store' )}}" method="POST">
                  @csrf
-                        <div class="form-group">
-                            <label>id material</label>
-                            <input type="text" class="form-control" name="id_material" placeholder="">
+
+                            <div class="form-group row">
+                            <label for="example-date-input" class="col-3 col-form-label">Tanggal</label>
+                            <div class="col-10">
+                                <input class="form-control" type="date" name="jadwal_padam" value="-" id="example-date-input">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>nama material</label>
-                            <input type="text" class="form-control" name="nama_material" placeholder="">
+                        <div class="form-group row">
+                            <label for="example-time-input" class="col-3 col-form-label">Mulai Padam</label>
+                            <div class="col-10">
+                                <input class="form-control" type="time" name="awal_padam" value="-" id="example-time-input">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-time-input" class="col-3 col-form-label">Selesai Padam</label>
+                            <div class="col-10">
+                                <input class="form-control" type="time" name="akhir_padam" value="-" id="example-time-input">
+                            </div>
                         </div>
                         
+                         <div class="form-group">
+                            <label class="form-check-label">Penyulang</label>
+                            <select class="custom-select"  name="penyulang">
+                            
+                              <option value="kesilir">kesilir </option>
+                              <option value="dasri"> dasri</option>
+                              <option value="purwoharjo"> purwoharjo</option>
+                              <option value="jajag">jajag </option>
+                              <option value="bsi1">bsi 1 </option>
+                              <option value="bsi2">bsi 2 </option>
+                              <option value="blokagung"> blokagung</option>
+                    
+                            </select>    
+                        </div>
+                          <div class="form-group">
+                            <label class="form-check-label">Wilayah Padam</label>
+                            <input type="text" class="form-control" name="wilayah_padam" placeholder="">
+                        </div>
+                <div class="form-group">
+                            <label>Tim</label>
+                            <select class="custom-select"  name="tim">
+                            
+                              <option value="prefentif11">prefentif 11 </option>
+                              <option value="prefentif12"> prefentif 12</option>
+                              <option value="jajag6"> jajag 6</option>
+                              <option value="jajag7">jajag 7 </option>
+                              <option value="inspeksi1">inspeksi 1 </option>
+                              <option value="inspeksi2">inspeksi 2 </option>
+                              <option value="kesilir6"> kesilir 6</option>
+                    
+                            </select>    
+                        </div>
+                          <div class="form-group">
+                            <label>Pekerjaan</label>
+                            <input type="text" class="form-control" name="deskripsi_pekerjaan" placeholder="">
+                        </div>
+<!--                           <div class="form-group">
+                            <label>Unit Kerja</label>
+                            <input type="text" class="form-control" disabled="true" name="unit_kerja" placeholder="pln ulp jajag">
+                        </div> -->
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-success">Save changes</button>
@@ -110,49 +224,5 @@ $title = ' Menu Material';?>
       </div>
 
 
-       <!-- edit -->
-
-<!-- 
-
-<script type="text/javascript">
-       
-
-         function showOverlay() {
-  $('.overlay').show()
-}
-setTimeout(showOverlay, 2000)
-     </script>   
-       <div class="overlay">
-      <div class="modal fade" id="exampleModaledit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-notify modal-lg modal-right" role="document">
-          <div class="modal-content">
-            <div class="modal-header alert alert-warning">
-              <h5 class="modal-title" id="exampleModalLabel">Edit Material</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-       
-                <form action="{{url('/material/update' , $mat->id )}}" method="POST">
-                 @csrf
-
-                        <div class="form-group">
-                            <label>id material</label>
-                            <input type="text" class="form-control" name="id_material" placeholder="{{ $mat->id}}">
-                        </div>
-                        <div class="form-group">
-                            <label>nama material</label>
-                            <input type="text" class="form-control" name="nama_material" placeholder="">
-                        </div>
-                       
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-success">Save changes</button>
-            </div>
-        </form>
-          </div>
-        </div>
-      </div>
-      </div> -->
+   
             @endsection

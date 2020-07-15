@@ -9,10 +9,13 @@ class Trafo extends Model
 
 
  protected $fillable = [
-        "kode_trafo","lokasi_trafo", "rancangan_trafo",
+        "kode_trafo","alamat", "seksen", "deskripsi", "gambar", "x", "y"
     ];
 
      public function petugas_cek(){
         return $this->belongsTo('App\Petugas');
+    }  
+    public function padam_cek(){
+        return $this->belongsTo('App\JadwalPadam');
     }  
 }

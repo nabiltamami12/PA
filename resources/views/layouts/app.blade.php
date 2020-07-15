@@ -1,5 +1,6 @@
  @include('layouts/header') 
-<body class="">
+
+<body >
   <div class="wrapper "  style="text-transform: uppercase;font-weight: 900;font-family:serif;">
    @include('layouts/sidebar')
 

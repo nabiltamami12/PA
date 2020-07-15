@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
  
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
  
 class LoginController extends Controller
 {
@@ -25,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/login';
+    protected $redirectTo = '/dashboard';
  
     /**
      * Login username to be used by the controller.
@@ -39,6 +40,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        // $this->redirectTo = route('login');
         $this->middleware('guest')->except('logout');
  
         $this->username = $this->findUsername();
@@ -53,7 +55,7 @@ class LoginController extends Controller
     {
         $login = request()->input('login');
  
-        $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'username' : 'username';
  
         request()->merge([$fieldType => $login]);
  
@@ -68,5 +70,17 @@ class LoginController extends Controller
     public function username()
     {
         return $this->username;
+    }
+
+     public function logout(Request $request)
+    {
+        $this->guard()->logout();
+ 
+        $request->session()->flush();
+ 
+        $request->session()->regenerate();
+ 
+        return redirect('login')
+            ->withSuccess('Terimakasih, selamat datang kembali!');
     }
 }

@@ -47,7 +47,7 @@ $title = ' Menu Material';?>
                     <td class="project-actions text-center">
 
                     <a class="btn btn-info btn-sm pb1" href="{{url('/material/edit', $mat->id )}}">
-                        <i class="fas fa-pencil-alt"></i>
+                        <i class="fa fa-pencil"></i>
                         Edit
                     </a>
                   </td>
@@ -58,7 +58,7 @@ $title = ' Menu Material';?>
                     {{ csrf_field() }}
                     {{  method_field('DELETE') }}
                     <center> <button class="btn btn-danger btn-sm" type="submit">
-                      
+                        <i class=" fa fa-trash"></i>
                         Delete
                     </button> </center>
                     </form>

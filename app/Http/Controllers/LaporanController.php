@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Komponen;
+use App\Material;
+use App\KebutuhanMaterial;
 class LaporanController extends Controller
 {
     /**
@@ -14,7 +16,11 @@ class LaporanController extends Controller
     public function index()
     {
         //
-         return view('laporan.laporan');
+           
+        $ori_kom = Komponen::all();
+        $ori_mat = Material::all();
+        $lap = KebutuhanMaterial::all();
+         return view('laporan.laporan', compact('lap', 'ori_mat','ori_kom'));
     }
 
     /**
@@ -35,7 +41,16 @@ class LaporanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $i_kom =  array(
+         'id_komponen' => $request->id_komponen,
+         'id_material'=> $request->id_material,
+         'nomor_sap'=> $request->nomor_sap,
+         'satuan'=> $request->satuan,
+         'jumlah' => $request->jumlah,
+         'keterangan' => $request->keterangan,        
+          );
+        KebutuhanMaterial::create($i_kom);
+        return redirect('laporan');
     }
 
     /**
@@ -80,6 +95,8 @@ class LaporanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $mat=Laporan::where('id',$id)->delete();
+ return redirect('laporan'); 
     }
+    
 }

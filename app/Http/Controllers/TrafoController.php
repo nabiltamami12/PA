@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Trafo;
 use App\Photo;
+use DB;
 class TrafoController extends Controller
 {
     /**
@@ -14,7 +15,8 @@ class TrafoController extends Controller
      */
     public function index()
     {
-           $trafo = Trafo::all();
+         $trafo = DB::table('Trafos')->simplePaginate(5);
+           // $trafo = Trafo::all();
          return view('trafo.trafo', compact('trafo'));
     }
 
@@ -50,14 +52,19 @@ class TrafoController extends Controller
    
 
         $request->image->move(public_path('images'), $imageName);
-
+        
+// json_encode($values)
 
  $input =  array(
          "kode_trafo" => $request->kode_trafo,
-         'lokasi_trafo'=> $request->lokasi_trafo,
-         'rancangan_trafo'=> $imageName,
+         'alamat'=> $request->alamat,
+         'seksen'=> $request->seksen,
+         'deskripsi'=> $request->deskripsi,
+         'gambar'=> $imageName,
+         'x'=> $request->x,
+         'y'=> $request->y,
 
-            
+          
 
           );
 
@@ -92,7 +99,9 @@ return redirect('trafo')
      */
     public function edit($id)
     {
-        //
+      
+             $trafo = Trafo::findOrFail($id);
+         return view('trafo.edit', compact('trafo'));
     }
 
     /**
@@ -104,7 +113,45 @@ return redirect('trafo')
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ]);
+
+  
+
+        $imageName = time().'.'.$request->image->extension();  
+
+   
+
+        $request->image->move(public_path('images'), $imageName);
+        
+// json_encode($values)
+
+ $input =  array(
+         'kode_trafo' => $request->kode_trafo,
+         'alamat'=> $request->alamat,
+         'seksen'=> $request->seksen,
+         'deskripsi'=> $request->deskripsi,
+         'gambar'=> $imageName,
+         'x'=> $request->x,
+         'y'=> $request->y,
+
+          
+
+          );
+
+
+        // $request->validate(['image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',]);
+        // $imageName = time().'.'.$request->image->extension();
+        // $request->image->move(public_path('images'), $imageName);
+
+    
+    
+        Trafo::whereId($id)->update($input);
+return redirect('trafo')
+            ->with('image',$imageName);
     }
 
     /**

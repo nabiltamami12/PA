@@ -17,18 +17,21 @@ class CreatePetugasTable extends Migration
          
         Schema::create('petugas', function (Blueprint $table) {
          
-         $table->id();
+         // $table->id();
+           $table->increments('id');          
+
             $table->string('id_petugas');
            $table->string('nama_petugas');
            $table->string('kelompok_petugas');
-           $table->string('jadwal_petugas');
-               $table->unsignedBigInteger('kode_trafo');
-    $table->foreign('kode_trafo')
-       ->references('id')->on('trafos')
-       ->onUpdate('cascade')
-       ->onDelete('cascade');
+           $table->date('jadwal_petugas');
+           $table->integer('kode_trafo');
+    //            $table->unsignedBigInteger('kode_trafo');
+    // $table->foreign('kode_trafo')
+    //    ->references('id')->on('trafos')
+    //    ->onUpdate('cascade')
+    //    ->onDelete('cascade');
             $table->string('lokasi_trafo');
-        
+          $table->timestamps();
      
 });
     

@@ -15,13 +15,8 @@ class CreateKomponensTable extends Migration
     {
           Schema::dropIfExists('komponens');
         Schema::create('komponens', function (Blueprint $table) {
-         $table->id();
+           $table->increments('id');          
        $table->string('id_komponen');
-        $table->unsignedBigInteger('id_material');
-    $table->foreign('id_material')
-       ->references('id')->on('materials')
-       ->onUpdate('cascade')
-       ->onDelete('cascade');
        $table->string('nama_komponen');
        $table->string('satuan');
             $table->timestamps();

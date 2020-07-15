@@ -16,7 +16,7 @@ setTimeout(showOverlay, 2000)
         <div class="modal-dialog modal-notify modal-lg modal-right" role="document">
           <div class="modal-content">
             <div class="modal-header alert alert-warning">
-              <h5 class="modal-title" id="exampleModalLabel">Edit Material</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Edit Komponen</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -30,7 +30,7 @@ setTimeout(showOverlay, 2000)
                             <label>id material</label>
                             <select class="custom-select"  name="id_material">
                               @foreach($mat_to_kom as $mat)
-                             <option value="{{ $mat->material_cek->id }}">{{ $mat->material_cek->id_material }} . {{ $mat->material_cek->nama_material }} </option>
+                             <option value="{{ $mat->id }}">{{ $mat->id_material }} . {{ $mat->nama_material }} </option>
                             @endforeach
                             </select>    
                         </div>

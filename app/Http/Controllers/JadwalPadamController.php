@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\JadwalPadam;
+use Illuminate\Support\Facades\Auth;
+use DB;
 class JadwalPadamController extends Controller
 {
     /**
@@ -13,8 +15,20 @@ class JadwalPadamController extends Controller
      */
     public function index()
     {
-        //
-         return view('padam.padam');
+  
+         
+             // $padamAdmin = JadwalPadam::findOrFail($id);
+             // $padamAdmin = JadwalPadam::all();
+         $user = Auth::user();
+
+         $padam = DB::table('jadwal_padams')->where('tim', $user->username)->simplePaginate(5);
+         $padamAdmin = DB::table('jadwal_padams')->simplePaginate(5);
+
+
+   // $padam = JadwalPadam::where('tim', $user->username)->get();
+         
+       
+         return view('padam.padam',compact('padam','padamAdmin'));
     }
 
     /**
@@ -35,7 +49,25 @@ class JadwalPadamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          $i_kom =  array(
+         "jadwal_padam" => $request->jadwal_padam,
+         'awal_padam'=> $request->awal_padam,
+         'akhir_padam'=> $request->akhir_padam,
+         'wilayah_padam'=> $request->wilayah_padam,
+         'deskripsi_pekerjaan'=> $request->deskripsi_pekerjaan,
+         'unit_kerja'=> 'pln ulp jajag',
+         'penyulang'=> $request->penyulang,
+         'tim'=> $request->tim,
+
+
+   
+
+
+            
+
+          );
+        JadwalPadam::create($i_kom);
+        return redirect('padam');
     }
 
     /**
@@ -55,9 +87,15 @@ class JadwalPadamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+   
     public function edit($id)
     {
-        //
+             $padamAdmin = JadwalPadam::findOrFail($id);
+         $user = Auth::user();
+
+
+   $padam = JadwalPadam::where('tim', $user->username)->get();
+         return view('padam.edit',compact('padam','padamAdmin'));
     }
 
     /**
@@ -69,7 +107,25 @@ class JadwalPadamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $i_kom =  array(
+              "jadwal_padam" => $request->jadwal_padam,
+         'awal_padam'=> $request->awal_padam,
+         'akhir_padam'=> $request->akhir_padam,
+         'wilayah_padam'=> $request->wilayah_padam,
+         'deskripsi_pekerjaan'=> $request->deskripsi_pekerjaan,
+         'unit_kerja'=> 'pln ulp jajag',
+         'penyulang'=> $request->penyulang,
+         'tim'=> $request->tim,
+
+   
+
+
+            
+
+          );
+        JadwalPadam::whereId($id)->update($i_kom);
+        return redirect('padam');
+    
     }
 
     /**
@@ -80,6 +136,7 @@ class JadwalPadamController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $mat=JadwalPadam::where('id',$id)->delete();
+ return redirect('padam'); 
     }
 }

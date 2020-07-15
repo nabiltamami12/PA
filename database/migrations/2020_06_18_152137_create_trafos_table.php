@@ -16,10 +16,14 @@ class CreateTrafosTable extends Migration
         Schema::dropIfExists('trafos');
         
         Schema::create('trafos', function (Blueprint $table) {
-         $table->id();           
+           $table->increments('id');          
         $table->string('kode_trafo');
-            $table->string('rancangan_trafo');
-            $table->string('lokasi_trafo');
+            $table->string('alamat');
+            $table->string('seksen');
+            $table->string('deskripsi');
+            $table->string('gambar');
+            $table->string('x');
+            $table->string('y');
             $table->timestamps();
         });
     }

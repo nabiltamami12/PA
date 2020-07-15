@@ -2,7 +2,7 @@
        @section('content')
 
 <?php
-$title = ' Menu Petugas';?>
+$title = ' Menu Akun Petugas';?>
  <title>
    <?php echo $title;?>
   </title>
@@ -27,23 +27,14 @@ $title = ' Menu Petugas';?>
                        <th style="font-weight: bold" >
                           NO
                         </th>
-                        <th style="font-weight: bold">
-                       id Petugas
-                        </th>
-                         <th style="font-weight: bold">
-                        nama Petugas
+                           <th style="font-weight: bold">
+                        tim
                         </th>
                            <th style="font-weight: bold">
-                        kelompok Petugas
+                        username 
                         </th>
                            <th style="font-weight: bold">
-                        jadwal 
-                        </th>
-                           <th style="font-weight: bold">
-                        kode trafo
-                        </th>
-                           <th style="font-weight: bold">
-                       lokasi
+                      password
                         </th>
                         <th style="font-weight: bold; text-align: center;" colspan="2" >
                           actions
@@ -54,27 +45,24 @@ $title = ' Menu Petugas';?>
                           <?php $number=1;?>
                           @foreach($pet as $mat)
                     <td>{{ $number }}</td>
-                    <td>{{ $mat->id_petugas }}</td>
-                    <td>{{ $mat->nama_petugas }}</td>
-                    <td>{{ $mat->kelompok_petugas }}</td>
-                    <td>{{ $mat->jadwal_petugas }}</td>
-                    <td>{{ $mat->trafo_cek->id }}</td>
-                    <td>{{ $mat->trafo_cek->lokasi_trafo }}</td>
+                    <td>{{ $mat->tim }}</td>
+                    <td>{{ $mat->username }}</td>
+                    <td>{{ $mat->password }}</td>
                     <td class="project-actions text-center">
 
-                    <a class="btn btn-info btn-sm pb1" href="{{url('/petugas/edit', $mat->id )}}">
-                        <i class="fas fa-pencil-alt"></i>
+                    <a class="btn btn-info btn-sm pb1" href="{{url('/akun/edit', $mat->id )}}">
+                        <i class="fa fa-pencil"></i>
                         Edit
                     </a>
                   </td>
                   <td>
-                    <form action="{{url('/petugas', $mat->id )}}" method="get">
+                    <form action="{{url('/akun', $mat->id )}}" method="get">
                     {{-- @csrf
                     @method('DELETE') --}}
                     {{ csrf_field() }}
                     {{  method_field('DELETE') }}
                     <center> <button class="btn btn-danger btn-sm" type="submit">
-                      
+                        <i class=" fa fa-trash"></i>
                         Delete
                     </button> </center>
                     </form>
@@ -83,6 +71,7 @@ $title = ' Menu Petugas';?>
                      <?php $number++;?>   @endforeach
                     <a href="#" class="btn btn-warning material-icons" data-toggle="modal" data-target="#exampleModal">add
             </a>
+          
                       </tbody>
                             
                     </table>
@@ -99,48 +88,33 @@ $title = ' Menu Petugas';?>
         <div class="modal-dialog modal-notify modal-lg modal-right" role="document">
           <div class="modal-content">
             <div class="modal-header alert alert-warning">
-              <h5 class="modal-title" id="exampleModalLabel">Tambah Petugas</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Tambah Akun</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-                <form action="{{url('/petugas/store' )}}" method="POST">
+                <form action="{{url('/akun/store' )}}" method="POST">
                  @csrf
-                        <div class="form-group">
-                            <label>id Petugas</label>
-                            <input type="text" class="form-control" name="id_petugas" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label>nama Petugas</label>
-                            <input type="text" class="form-control" name="nama_petugas" placeholder="">
-                        </div>  
-                         <div class="form-group">
-                            <label>kelompok Petugas</label>
-                            <input type="text" class="form-control" name="kelompok_petugas" placeholder="">
-                        </div>  
- <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">jadwal</label>
-                        </div>
-                            <input class="form-control" type="date" name="jadwal_petugas" value="<?php echo date(today());?>" id="example-date-input">
-                        </div>
-
-
    <div class="form-group">
-                            <label>id material</label>
-                            <select class="custom-select"  name="kode_trafo">
-                               @foreach($tra as $mat)
-                              <option value="{{ $mat->id_trafo }}">{{ $mat->id }} . {{ $mat->kode_trafo }} </option>
+                            <label>Tim</label>
+                            <select class="custom-select"  name="tim">
+                               @foreach($petugas as $mat)
+                              <option value="{{ $mat->tim }}">{{ $mat->tim }} </option>
                          @endforeach
                             </select>    
                         </div>
-
+<div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="email" value="">
+                        </div>
                          <div class="form-group">
-                            <label>lokasi</label>
-                           
-                            <input type="text" class="form-control" name="lokasi_trafo" value="{{ $mat->lokasi_trafo }} ">
-                      
+                            <label>username</label>
+                            <input type="text" class="form-control" name="username" value="">
+                        </div>
+                         <div class="form-group">
+                            <label>password</label>
+                            <input type="text" class="form-control" name="password" value="">
                         </div>
                 
             <div class="modal-footer">
