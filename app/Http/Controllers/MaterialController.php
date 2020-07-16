@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\JadwalPadam;
+use App\KebutuhanMaterial;
 use App\Material;
 class MaterialController extends Controller
 {
@@ -13,9 +15,10 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        //
-        $mate = Material::all();
-         return view('material.material', compact('mate'));
+            // $ori_kom = Komponen::all();
+        $ori_mat = Material::all();
+        $lap = KebutuhanMaterial::all();
+         return view('laporan.laporan', compact('lap', 'ori_mat'));
     }
 
     /**
@@ -37,15 +40,6 @@ class MaterialController extends Controller
     public function store(Request $request)
     {
         //
-        $i_mat =  array(
-         
-         'id_material'=> $request->id_material,
-         'nama_material'=> $request->nama_material,
-            
-
-          );
-        Material::create($i_mat);
-        return redirect('material');
     }
 
     /**
@@ -67,9 +61,7 @@ class MaterialController extends Controller
      */
     public function edit($id)
     {
-        // $show = Infokajian::findOrFail($id);
-         $mat = Material::findOrFail($id);
-         return view('material.edit', compact('mat'));
+        //
     }
 
     /**
@@ -81,14 +73,7 @@ class MaterialController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $u_mat = array(
-             'id_material'=> $request->id_material,
-         'nama_material'=> $request->nama_material,
-        );
-
-        Material::whereId($id)->update($u_mat);
-
-        return redirect('material');
+        //
     }
 
     /**
@@ -99,7 +84,6 @@ class MaterialController extends Controller
      */
     public function destroy($id)
     {
-        $mat=Material::where('id',$id)->delete();
- return redirect('material'); 
+        //
     }
 }

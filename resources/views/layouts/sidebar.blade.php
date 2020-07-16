@@ -22,7 +22,13 @@
            <li class="nav-item {{ request()->is('laporan') ? 'active' : '' }} ">
             <a class="nav-link" href="{{ url('laporan') }}">
               <i class="material-icons">library_books</i>
-              <p>Laporan</p>
+              <p>Laporan Pemeliharaan</p>
+            </a>
+          </li>
+           <li class="nav-item {{ request()->is('material') ? 'active' : '' }} ">
+            <a class="nav-link" href="{{ url('material') }}">
+              <i class="material-icons">library_books</i>
+              <p>Laporan Material</p>
             </a>
           </li>
           <li class="nav-item {{ request()->is('akun') ? 'active' : '' }}">

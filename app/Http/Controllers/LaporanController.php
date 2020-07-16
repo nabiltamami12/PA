@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Komponen;
-use App\Material;
-use App\KebutuhanMaterial;
+use App\JadwalPadam;
+use Illuminate\Support\Facades\Auth;
+use DB;
+use App\Trafo;
 class LaporanController extends Controller
 {
     /**
@@ -16,11 +17,13 @@ class LaporanController extends Controller
     public function index()
     {
         //
-           
-        $ori_kom = Komponen::all();
-        $ori_mat = Material::all();
-        $lap = KebutuhanMaterial::all();
-         return view('laporan.laporan', compact('lap', 'ori_mat','ori_kom'));
+         //         $user = Auth::user();
+         // $padam = JadwalPadam::where('tim', $user->username)->with('trafo_cek')->get();
+        $BP = JadwalPadam::with('trafo_cek')->count();
+   $padamAdmin = JadwalPadam::with('trafo_cek')->get();
+         return view('laporan.pemeliharaan',compact('padamAdmin'))->with('BP', $BP);;
+         // return view('laporan.pemeliharaan');
+    
     }
 
     /**
@@ -41,16 +44,7 @@ class LaporanController extends Controller
      */
     public function store(Request $request)
     {
-       $i_kom =  array(
-         'id_komponen' => $request->id_komponen,
-         'id_material'=> $request->id_material,
-         'nomor_sap'=> $request->nomor_sap,
-         'satuan'=> $request->satuan,
-         'jumlah' => $request->jumlah,
-         'keterangan' => $request->keterangan,        
-          );
-        KebutuhanMaterial::create($i_kom);
-        return redirect('laporan');
+    
     }
 
     /**
@@ -59,9 +53,10 @@ class LaporanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+   
+
     }
 
     /**

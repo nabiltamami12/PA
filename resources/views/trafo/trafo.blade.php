@@ -123,11 +123,11 @@ $title = ' Menu Trafo';?>
                 </div>
                 <div class="form-group">
                             <label>latitude</label>
-                            <input type="text" class="form-control" name="x" placeholder="">
+                            <input type="text" class="form-control" name="latitude" placeholder="">
                         </div>
                         <div class="form-group">
                             <label>longitude</label>
-                            <input type="text" class="form-control" name="y" placeholder="">
+                            <input type="text" class="form-control" name="longitude" placeholder="">
                         </div>
                         
                         

@@ -61,10 +61,10 @@ class TrafoController extends Controller
          'seksen'=> $request->seksen,
          'deskripsi'=> $request->deskripsi,
          'gambar'=> $imageName,
-         'x'=> $request->x,
-         'y'=> $request->y,
+         'latitude'=> $request->latitude,
+         'longitude'=> $request->longitude,
 
-          
+         
 
           );
 
@@ -135,8 +135,8 @@ return redirect('trafo')
          'seksen'=> $request->seksen,
          'deskripsi'=> $request->deskripsi,
          'gambar'=> $imageName,
-         'x'=> $request->x,
-         'y'=> $request->y,
+         'latitude'=> $request->latitude,
+         'longitude'=> $request->longitude,
 
           
 

@@ -19,7 +19,7 @@ class CreateKebutuhanMaterialsTable extends Migration
        // $table->integer('nomor_sap');
            $table->increments('id'); 
            $table->date('tanggal');         
-             $table->integer('id_material')->unsigned();
+        $table->integer('id_material')->unsigned();
    
        $table->string('jumlah');
        $table->string('status');

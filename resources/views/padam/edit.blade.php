@@ -61,7 +61,11 @@ setTimeout(showOverlay, 2000)
                         </div>
                           <div class="form-group">
                             <label class="form-check-label">Wilayah Padam</label>
-                            <input type="text" class="form-control" name="wilayah_padam" placeholder="" value="{{$padamAdmin->wilayah_padam}}">
+                            <select class="custom-select"  name="id_trafo">
+                             
+                              <option value="{{$padamAdmin->id_trafo}}">{{ $padamAdmin->trafo_cek->kode_trafo }} - {{ $padamAdmin->trafo_cek->alamat }} </option>
+                            
+                            </select>  
                         </div>
                 <div class="form-group">
                             <label>Tim</label>
@@ -77,7 +81,10 @@ setTimeout(showOverlay, 2000)
                     
                             </select>    
                         </div>
-                       
+                         <div class="form-group">
+                            <label>Pekerjaan</label>
+                            <input type="text" class="form-control" name="deskripsi_pekerjaan" placeholder="" value="{{$padamAdmin->deskripsi_pekerjaan}}">
+                        </div>
             <div class="modal-footer">
             <a href="{{ url('padam') }}">  <button   type="button" class="btn btn-danger" data-dismiss="modal">Close</button></a>
               <button type="submit" class="btn btn-success">Save changes</button>

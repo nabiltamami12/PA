@@ -17,13 +17,14 @@ class CreateTrafosTable extends Migration
         
         Schema::create('trafos', function (Blueprint $table) {
            $table->increments('id');          
+            
         $table->string('kode_trafo');
             $table->string('alamat');
             $table->string('seksen');
             $table->string('deskripsi');
             $table->string('gambar');
-            $table->string('x');
-            $table->string('y');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->timestamps();
         });
     }

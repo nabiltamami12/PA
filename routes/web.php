@@ -106,6 +106,10 @@ Route::get('/darurat', function () {
     return view('darurat');
 });
 });
+
+
+Route::get('/', 'HomeController@index');
+
 Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 

@@ -61,7 +61,7 @@ $title = ' Menu Padam';?>
                     <td>{{ $mat->jadwal_padam }}</td>
                     <td>{{ $mat->awal_padam }} - {{ $mat->akhir_padam }}</td>
                    <td>{{ $mat->penyulang }}</td>
-                   <td>{{ $mat->wilayah_padam }}</td>
+                   <td>{{ $mat->trafo_cek->kode_trafo }} - {{ $mat->trafo_cek->alamat }}</td>
                    <td>{{ $mat->tim }}</td>
                     <td>{{ $mat->deskripsi_pekerjaan }}</td>
                     <td>{{ $mat->unit_kerja }}</td>
@@ -99,7 +99,7 @@ $title = ' Menu Padam';?>
                     <td>{{ $mat->jadwal_padam }}</td>
                     <td>{{ $mat->awal_padam }} - {{ $mat->akhir_padam }}</td>
                    <td>{{ $mat->penyulang }}</td>
-                   <td>{{ $mat->wilayah_padam }}</td>
+                   <td>{{ $mat->trafo_cek->kode_trafo }} - {{ $mat->trafo_cek->alamat }}</td>
                    <td>{{ $mat->tim }}</td>
                     <td>{{ $mat->deskripsi_pekerjaan }}</td>
                     <td>{{ $mat->unit_kerja }}</td>
@@ -125,11 +125,7 @@ $title = ' Menu Padam';?>
                       </tbody>
                             
                     </table>
-    @if(Auth::user()->role=='admin')
-  <div>{{ $padamAdmin->links() }}</div>
-  @else
-  <div>{{ $padam->links() }}</div>
-  @endif
+  <!--  -->
 
 
                   </div>
@@ -189,7 +185,11 @@ $title = ' Menu Padam';?>
                         </div>
                           <div class="form-group">
                             <label class="form-check-label">Wilayah Padam</label>
-                            <input type="text" class="form-control" name="wilayah_padam" placeholder="">
+                            <select class="custom-select"  name="id_trafo">
+                              @foreach($tra as $mat)
+                              <option value="{{$mat->id}}">{{ $mat->kode_trafo }} - {{ $mat->alamat }} </option>
+                             @endforeach
+                            </select>  
                         </div>
                 <div class="form-group">
                             <label>Tim</label>

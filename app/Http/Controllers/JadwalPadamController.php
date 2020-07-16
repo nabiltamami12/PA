@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\JadwalPadam;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use App\Trafo;
+
 class JadwalPadamController extends Controller
 {
     /**
@@ -20,15 +22,19 @@ class JadwalPadamController extends Controller
              // $padamAdmin = JadwalPadam::findOrFail($id);
              // $padamAdmin = JadwalPadam::all();
          $user = Auth::user();
+$tra = Trafo::all();
 
-         $padam = DB::table('jadwal_padams')->where('tim', $user->username)->simplePaginate(5);
-         $padamAdmin = DB::table('jadwal_padams')->simplePaginate(5);
+         // $padam = DB::table('jadwal_padams')->with('trafo_cek')->where('tim', $user->username)->simplePaginate(5);
+   $padam = JadwalPadam::where('tim', $user->username)->with('trafo_cek')->get();
+   $padamAdmin = JadwalPadam::with('trafo_cek')->get();
+
+         // $padamAdmin = DB::table('jadwal_padams')->with('trafo_cek')->simplePaginate(5);
 
 
    // $padam = JadwalPadam::where('tim', $user->username)->get();
          
        
-         return view('padam.padam',compact('padam','padamAdmin'));
+         return view('padam.padam',compact('padam','padamAdmin','tra'));
     }
 
     /**
@@ -49,16 +55,27 @@ class JadwalPadamController extends Controller
      */
     public function store(Request $request)
     {
+
+
+        $ide_trafo = $request->id_trafo;
+        $lat = DB::table('trafos')->where('id', $ide_trafo)->get('latitude');
+        $lang = DB::table('trafos')->where('id', $ide_trafo)->get('longitude');
+
+        // $lat = Trafo::select('latitude')->where('id',$ide_trafo);
+        // $lang = Trafo::select('longitude')->where('id',$ide_trafo);
+
+
           $i_kom =  array(
          "jadwal_padam" => $request->jadwal_padam,
          'awal_padam'=> $request->awal_padam,
          'akhir_padam'=> $request->akhir_padam,
-         'wilayah_padam'=> $request->wilayah_padam,
+         'id_trafo'=> $request->id_trafo,
          'deskripsi_pekerjaan'=> $request->deskripsi_pekerjaan,
          'unit_kerja'=> 'pln ulp jajag',
          'penyulang'=> $request->penyulang,
          'tim'=> $request->tim,
-
+  'latitude'=> $lat,
+         'longitude'=> $lang,
 
    
 
@@ -93,9 +110,9 @@ class JadwalPadamController extends Controller
              $padamAdmin = JadwalPadam::findOrFail($id);
          $user = Auth::user();
 
-
-   $padam = JadwalPadam::where('tim', $user->username)->get();
-         return view('padam.edit',compact('padam','padamAdmin'));
+$tra = Trafo::all();
+   $padam = JadwalPadam::where('tim', $user->username)->with('trafo_cek')->get();
+         return view('padam.edit',compact('padam','padamAdmin','tra'));
     }
 
     /**
@@ -107,17 +124,20 @@ class JadwalPadamController extends Controller
      */
     public function update(Request $request, $id)
     {
+         $ide_trafo = $request->id_trafo;
+        $lat = DB::table('trafos')->where('id', $ide_trafo)->get('latitude');
+        $lang = DB::table('trafos')->where('id', $ide_trafo)->get('longitude');
          $i_kom =  array(
               "jadwal_padam" => $request->jadwal_padam,
          'awal_padam'=> $request->awal_padam,
          'akhir_padam'=> $request->akhir_padam,
-         'wilayah_padam'=> $request->wilayah_padam,
+         'id_trafo'=> $request->id_trafo,
          'deskripsi_pekerjaan'=> $request->deskripsi_pekerjaan,
          'unit_kerja'=> 'pln ulp jajag',
          'penyulang'=> $request->penyulang,
          'tim'=> $request->tim,
-
-   
+  'latitude'=> $lat,
+         'longitude'=> $lang,
 
 
             
